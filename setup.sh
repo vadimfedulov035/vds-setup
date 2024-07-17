@@ -24,6 +24,7 @@ set_swap() {
                 swapon /swap.img
                 sysctl vm.swappiness=200
         fi
+	sysctl vm.swappiness=200
 	d="vm\.swappiness=[0-9]*"  # default value
 	setting="vm\.swappiness=200"
 	settings="/etc/sysctl.conf"
