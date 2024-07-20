@@ -24,7 +24,6 @@ set_swap() {
                 swapon /swap.img
                 sysctl vm.swappiness=200
         fi
-	sysctl vm.swappiness=200
 	d="vm\.swappiness=[0-9]*"  # default value
 	setting="vm\.swappiness=200"
 	settings="/etc/sysctl.conf"
@@ -70,7 +69,7 @@ set_golang() {
 set_vim() {
 	echo "Vim setup..."
 	settings="/root/.vimrc"
-	setting_arr=("set colorcolumn=80", "match ErrorMsg '\%>80v.\+'")
+	setting_arr=("set colorcolumn=80" "match ErrorMsg '\%>80v.\+'")
 	for setting in "${setting_arr[@]}"; do
 		if ! grep -q "^$setting" "$settings"; then
 			echo "$setting" >> "$settings" 
