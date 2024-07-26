@@ -1,8 +1,8 @@
 #!/bin/bash
 
-USER="veotri"
-NAME="Vadim"
-EMAIL="vadimfedulov035@gmail.com"
+user="veotri"
+name="Vadim"
+email="vadimfedulov035@gmail.com"
 
 set_ufw() {
     echo "UFW setup..."
@@ -40,17 +40,8 @@ set_journald() {
 set_git() {
 	echo "Git setup..."
 	git config --global init.defaultBranch main
-	git config --global user.name $NAME
-	git config --global user.email $EMAIL
-    V_LINK="https://api.github.com/repos/jesseduffield/lazygit/releases/latest"
-    VERSION=$(curl -s $V_LINK | grep -Po '"tag_name": "v\K[^"]*')
-    ARC="lazygit_${VERSION}_Linux_x86_64.tar.gz"
-    ARC_PATH="releases/latest/download/$ARC" 
-    LINK="https://github.com/jesseduffield/lazygit/$ARC_PATH"
-    curl -Lo lazygit.tar.gz $LINK
-    tar xf lazygit.tar.gz lazygit
-    install lazygit /usr/local/bin
-    rm -f lazygit*
+	git config --global user.name $name
+	git config --global user.email $email
 }
 
 set_python() {
@@ -109,8 +100,8 @@ set_vim() {
 
 set_user() {
 	echo "User setup..."
-	adduser $USER
-	usermod -aG sudo $USER
+	adduser $user
+	usermod -aG sudo $user
 	ssh-keygen -t ed25519
     positive="PermitRootLogin yes"
 	negative="PermitRootLogin no"
