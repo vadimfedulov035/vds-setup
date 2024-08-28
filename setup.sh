@@ -22,12 +22,12 @@ set_swap() {
                 chmod 600 /swap.img
                 mkswap /swap.img
                 swapon /swap.img
-                sysctl vm.swappiness=100
+                sysctl -w vm.swappiness=10
         fi
-	d="vm\.swappiness=[0-9]*"
-	setting="vm\.swappiness=100"
-	settings="/etc/sysctl.conf"
-	grep -q "^$setting" "$settings" || sed -i "s/$d/$setting/g" "$settings"
+	pattern="vm.swappiness = [0-9]*"
+	setting="vm.swappiness = 10"
+    settings=/etc/sysctl.conf
+    sed -i "s/$pattern/$setting/g" $settings || echo "$setting" > $settings 
 }
 
 set_journald() {
@@ -68,12 +68,15 @@ set_golang() {
 
 set_vim() {
 	echo "Vim setup..."
-    curl -sL install-node.vercel.app/lts | bash
 	settings="/root/.vimrc"
     setting_arr=(
-        "set expandtab"
+        "autocmd FileType c setlocal noexpandtab"
+        "autocmd FileType go setlocal noexpandtab"
+        "autocmd FileType python setlocal expandtab"
+        ""
         "set tabstop=4"
         "set shiftwidth=4"
+        ""
         "set smarttab"
         "set smartindent"
         ""
